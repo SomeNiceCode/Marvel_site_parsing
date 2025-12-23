@@ -22,7 +22,7 @@ if response.status_code == 200:
         name += chr["secondary_text"] if chr["secondary_text"] is not None else ""
         char_response = req.get(f"{MARVER_URL}{link}")
         html = char_response.content
-        soup = BeautifulSoup(html, "lxml")
+        soup = BeautifulSoup(html, "html.parser")
         data_dict = []
         data_dict.append(name)
         data_dict.append(link2)
