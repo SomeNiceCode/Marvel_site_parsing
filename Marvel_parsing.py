@@ -17,14 +17,16 @@ if response.status_code == 200:
     all_c = response.json()
     for chr in all_c["data"]["results"]["data"][:10]:
         link = chr["link"]["link"]
+        link2 = f"{MARVER_URL}{link}"
         name = chr["headline"]
         name += chr["secondary_text"] if chr["secondary_text"] is not None else ""
         char_response = req.get(f"{MARVER_URL}{link}")
         html = char_response.content
-        soup = BeautifulSoup(html, "html.parser")
+        soup = BeautifulSoup(html, "lxml")
         data_dict = []
         data_dict.append(name)
-        data_dict.append(link)
+        data_dict.append(link2)
+        print(link2)
         try:
             accordion = soup.find("div", attrs={"class": "RailExploreBio__Accordion"})
 
